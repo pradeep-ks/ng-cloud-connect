@@ -14,5 +14,5 @@
      * @description
      * Define the module by passing an empty array as second parameter.
      */
-    angular.module('cloudApp', ['ngMaterial', 'ngMessages', 'ngCookies', 'core']);
+    angular.module('cloudApp', ['ngMaterial', 'ngMessages', 'ngCookies', 'core', 'jwt']);
 })();
