@@ -1,0 +1,32 @@
+{
+  "name": "ng-cloud-connect",
+  "version": "1.0.0",
+  "description": "AngularJS Frontend for Cloud Connect Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm install",
+    "start": "http-server ./ -a localhost -p 3000 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pradeep-ks/ng-cloud-connect.git"
+  },
+  "keywords": [
+    "AngularJS",
+    "Cloud",
+    "Connect"
+  ],
+  "author": "Pradeep Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pradeep-ks/ng-cloud-connect/issues"
+  },
+  "homepage": "https://github.com/pradeep-ks/ng-cloud-connect#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  },
+  "dependencies": {
+    "angular": "^1.7.8"
+  }
+}
