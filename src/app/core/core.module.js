@@ -11,5 +11,5 @@
 (function() {
     'use strict';
 
-    angular.module('core', []);
+    angular.module('core', ['ngMaterial', 'ngMessages']);
 })();
