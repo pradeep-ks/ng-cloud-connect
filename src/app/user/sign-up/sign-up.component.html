@@ -1,0 +1,64 @@
+<div ng-cloak>
+    <md-content layout="row" layout-xs="column" layout-margin="" layout-padding="">
+        <div flex="35">
+            <form name="signUpForm" novalidate ng-submit="$ctrl.onSubmit()">
+                <md-card md-theme-watch>
+                    <md-card-title>
+                        <md-card-title-text class="text-center">
+                            <span class="md-title">New User Sign Up</span>
+                            <span class="md-subhead">Fill in the details and click <em>Sign Up</em></span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-progress-linear md-mode="indeterminate" ng-if="$ctrl.loading"></md-progress-linear>
+                    <md-card-content>
+                        <div layout="column" layout-padding="">
+                            <md-input-container class="md-block">
+                                <label>Username</label>
+                                <input type="text" required name="username" ng-model="$ctrl.userData.username"
+                                    ng-minlength="5" aria-label="Username">
+                                <div ng-messages="signUpForm.username.$error">
+                                    <div ng-message="required">Username required.</div>
+                                    <div ng-message="md-minlength">Minimum 5 characters required</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Full Name</label>
+                                <input type="text" required name="fullName" ng-model="$ctrl.userData.fullName"
+                                    ng-minlength="5" aria-label="Full Name">
+                                <div ng-messages="signUpForm.fullName.$error">
+                                    <div ng-message="required">Full Name is required.</div>
+                                    <div ng-message="md-minlength">Minimum 5 characters required</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Email Address</label>
+                                <input type="email" required name="email" ng-model="$ctrl.userData.email" ng-minlength="5"
+                                    aria-label="Email">
+                                <div ng-messages="signUpForm.email.$error">
+                                    <div ng-message="required">Email Address required.</div>
+                                    <div ng-message="md-minlength">Minimum 5 characters required</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Password</label>
+                                <input type="password" name="password" required ng-model="$ctrl.userData.password"
+                                    ng-minlength="6" aria-label="Password">
+                                <div ng-messages="signUpForm.password.$error">
+                                    <div ng-message="required">Password required.</div>
+                                    <div ng-message="md-minlength">Minimum 6 characters required</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button type="submit" class="md-raised md-primary md-curved-button"
+                            ng-disabled="signUpForm.$invalid || $ctrl.loading">JOIN
+                            US</md-button>
+                        <md-button class="md-raised md-accent md-curved-button" type="reset">RESET</md-button>
+                    </md-card-actions>
+                </md-card>
+            </form>
+        </div>
+        <div flex="65"></div>
+    </md-content>
+</div>

@@ -8,13 +8,13 @@
      * This AngularJS factory provides methods for JSON Web Token (JWT) based
      * authentication and authorization for the application.
      * 
-     * @param {object} $cookies - The AngularJS cookies service
-     * @param {object} $http - The AngularJS http service for AJAX communication
-     * @param {object} $log - The AngularJS logging service
-     * @param {object} $timeout - The AngularJS timeout service
+     * @param {any} $cookies - Provides read/write access to browser's cookies. Requires the 'ngCookies' module
+     * @param {any} $http - The core AngularJS service that facilitates communication with remote HTTP servers
+     * @param {any} $log - The core AngularJS service for logging
      * @param {string} API_AUTH_URL - The authentication api url constant
      */
-    function JwtService($cookies, $http, $log, $timeout, API_AUTH_URL) {
+    function JwtService($cookies, $http, $log, API_AUTH_URL) {
+        $log.info('Inside JwtService....');
         var service = {
             signin: signin,
             signup: signup,
@@ -34,24 +34,22 @@
          * @param {function} callback - The callback function
          */
         function signin(credentials, callback) {
-            $log.info('Attempting to sign in....');
-            $timeout(function () {
-                $http.post(`${API_AUTH_URL}/signin`, credentials).then(function (response) {
-                    $log.info(`Got response: ${JSON.parse(response)}`);
-                    if (response.status === 200) {
-                        var result = {
-                            success: true,
-                            data: response.data
-                        };
-                        callback(result);
-                    } else {
-                        $log.error('Something went wrong!');
-                        $log.error(errResponse);
-                    }
-                }, function (errResponse) {
+            $log.info('JwtService::signin....');
+            $http.post(`${API_AUTH_URL}/signin`, credentials).then(function (response) {
+                $log.info(response);
+                if (response.status === 200) {
+                    var result = {
+                        success: true,
+                        data: response.data
+                    };
+                    callback(result);
+                } else {
+                    $log.error('Something went wrong!');
                     $log.error(errResponse);
-                });
-            }, 5000);
+                }
+            }, function (errResponse) {
+                $log.error(errResponse);
+            });
         }
 
         /**
@@ -80,7 +78,6 @@
          * Use this factory method to end a user's session.
          */
         function signout() {
-            $log.info('Ending session....');
             $cookies.remove('accessToken');
         }
 
@@ -92,22 +89,21 @@
          * @param {object} tokenInfo - The JWT token of authenticated user
          */
         function beginSession(tokenInfo) {
-            $log.info('Starting session....');
             var accessToken = {
-                token: tokenInfo.token,
-                type: tokenInfo.type
+                token: tokenInfo.accessToken,
+                type: tokenInfo.tokenType
             };
             // Expire token after 3 days
             var expire = new Date();
             expire.setDate(expire.getDate() + 3);
-            $cookies.putObject('accessToken', accessToken, { expires: expire });
+            $cookies.put('accessToken', JSON.stringify(accessToken), { expires: expire });
         }
     }
 
     /**
      * Specify dependencies of @function JwtService
      */
-    JwtService.$inject = ['$cookies', '$http', '$log', '$timeout', 'API_AUTH_URL'];
+    JwtService.$inject = ['$cookies', '$http', '$log', 'API_AUTH_URL'];
 
     /**
      * Register the @function JwtService as a factory with the module.

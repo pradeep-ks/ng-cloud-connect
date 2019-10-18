@@ -1,1 +1,14 @@
-<h1 class="md-display-3">Welcome to {{ $ctrl.title }}</h1>
+<div ng-cloak>
+    <h1 class="md-display-3">Welcome to {{ $ctrl.title }}, {{ $ctrl.loggedInUser.fullName }}</h1>
+    <ul>
+        <li ng-if="!$ctrl.loggedInUser">
+            <a href="#!/sign-in">Click here</a> to <strong>Sign In</strong>
+        </li>
+        <li ng-if="!$ctrl.loggedInUser">
+            <a href="#!/sign-up">Click here</a> to <strong>Join Us</strong>
+        </li>
+        <li ng-if="$ctrl.loggedInUser">
+            <a ng-click="$ctrl.signout()" style="cursor: pointer;">Logout</a>
+        </li>
+    </ul>
+</div>

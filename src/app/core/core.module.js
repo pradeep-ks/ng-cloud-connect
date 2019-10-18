@@ -11,5 +11,5 @@
 (function() {
     'use strict';
 
-    angular.module('core', ['ngMaterial', 'ngMessages']);
+    angular.module('core', ['ngMaterial', 'ngMessages', 'ngCookies', 'user', 'jwt']);
 })();
